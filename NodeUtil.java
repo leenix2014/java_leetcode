@@ -30,21 +30,24 @@ public class NodeUtil {
             int sz = queue.size();
             for(int i=0;i<sz;i++){
                 TreeNode curr = queue.poll();
-                if(curr.val==null){ // 中序遍历的null是val为null，TreeNode不为null
-                    continue;
-                }
                 int leftIndex = index+1;
                 int rightIndex = index+2;
                 if(leftIndex<nums.length) {
-                    TreeNode left = new TreeNode(nums[leftIndex]);
-                    curr.left = left;
-                    queue.offer(left);
+                    Integer val = nums[leftIndex];
+                    if(val != null) {
+                        TreeNode left = new TreeNode(val);
+                        curr.left = left;
+                        queue.offer(left);
+                    }
                     index++;
                 }
                 if(rightIndex<nums.length) {
-                    TreeNode right = new TreeNode(nums[rightIndex]);
-                    curr.right = right;
-                    queue.offer(right);
+                    Integer val = nums[rightIndex];
+                    if(val != null) {
+                        TreeNode right = new TreeNode(nums[rightIndex]);
+                        curr.right = right;
+                        queue.offer(right);
+                    }
                     index++;
                 }
             }
