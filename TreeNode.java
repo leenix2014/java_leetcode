@@ -52,20 +52,24 @@ public class TreeNode {
             int sz = queue.size();
             for(int i=0;i<sz;i++){
                 TreeNode curr = queue.poll();
-                if(curr.left == null && curr.right == null) {
+                if(curr.left == null && curr.right == null) { //最底层的叶子节点无需打印null
                     return sb.toString();
                 }
-                if(curr.left != null){
+                if(curr.left != null && curr.left.val != null){
                     queue.offer(curr.left);
                     sb.append(",").append(curr.left.val);
+                } else if(curr.left == null){
+                    sb.append(",null");
                 } else {
-                    sb.append(",null'");
+                    sb.append(",null'"); //有TreeNode, val为null
                 }
-                if(curr.right != null){
+                if(curr.right != null && curr.right.val != null){
                     queue.offer(curr.right);
                     sb.append(",").append(curr.right.val);
-                } else {
-                    sb.append(",null'");
+                } else if(curr.right == null){
+                    sb.append(",null");
+                }  else {
+                    sb.append(",null'"); //有TreeNode, val为null
                 }
             }
         }
