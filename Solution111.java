@@ -10,12 +10,21 @@ public class Solution111 {
     }
 
     int min = 0;
-    public int minDepth(TreeNode root) {
-        if(root == null){
+    public int minDepth(TreeNode node) {
+        if (node == null) {
             return 0;
         }
-        int leftMin = minDepth(root.left);
-        int rightMin = minDepth(root.right);
-        return Math.min(leftMin+1, rightMin+1);
+
+        if (node.left == null) {
+            return 1 + minDepth(node.right);
+        }
+
+        if (node.right == null) {
+            return 1 + minDepth(node.left);
+        }
+
+        int leftDepth = minDepth(node.left);
+        int rightDepth = minDepth(node.right);
+        return 1 + Math.min(leftDepth, rightDepth);
     }
 }
