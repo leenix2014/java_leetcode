@@ -63,7 +63,7 @@ public class HWOD3 {
     private static boolean[][] visited;//记录访问过的节点
     private static boolean[][] touchEnd;//记录能到达终点的节点
     private static void backtrack(int[][] board, int i, int j, int X, int Y){
-        if(board[i][j]==WALL){//撞墙则返回
+        if(i==X||j==Y||board[i][j]==WALL){//撞墙或者边界后返回
             return;
         }
         board[i][j]=1;
@@ -78,12 +78,8 @@ public class HWOD3 {
             }
         }
         //做选择
-        if(i+1<X) {
-            backtrack(board, i + 1, j, X, Y);//先往右走
-        }
-        if(j+1<Y){
-            backtrack(board, i, j + 1, X, Y);//再往上走
-        }
+        backtrack(board, i + 1, j, X, Y);//先往右走
+        backtrack(board, i, j + 1, X, Y);//再往上走
         //回溯
         board[i][j]=0;
     }
